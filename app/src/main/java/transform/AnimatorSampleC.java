@@ -64,7 +64,7 @@ public class AnimatorSampleC extends AppCompatActivity {
         screenWidth = ScreenUtils.getScreenWidth(this);
         screenHeight = ScreenUtils.getScreenHeight(this);
         sheetsHeight = screenHeight / 6 * 5;
-        padding = ScreenUtils.dip2px(AnimatorSampleC.this,14);
+        padding = ScreenUtils.dip2px(AnimatorSampleC.this,16);
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,7 +102,7 @@ public class AnimatorSampleC extends AppCompatActivity {
         final float height = elementValues.getBgHeight();
         final float heightPercent = height / screenHeight;
         final float icon_pivotX = elementValues.getIconPivotX();
-        final float icon_pivotY = elementValues.getIconPivotY();
+        final float icon_pivotY = elementValues.getIconPivotY() + statusbarHeight;
         final float icon_width = elementValues.getIconWidth();
 
         //背景塊漸變
@@ -115,21 +115,21 @@ public class AnimatorSampleC extends AppCompatActivity {
         final ObjectAnimator animatorSheetScale = getFloatAnimator(SHORT_TIME,bottom_sheets, "scaleY", heightPercent, 1);
 
         //获取到图标位置及大小
-        final ObjectAnimator animatorIconGetX = getFloatAnimator(LONG_TIME,icon_trans, "translationX", icon_pivotX, icon_pivotX);
-        final ObjectAnimator animatorIconGetY = getFloatAnimator(LONG_TIME,icon_trans, "translationY", icon_pivotY, icon_pivotY);
+        final ObjectAnimator animatorIconGetX = getFloatAnimator(LONG_TIME,icon_trans, "x", icon_pivotX, icon_pivotX);
+        final ObjectAnimator animatorIconGetY = getFloatAnimator(LONG_TIME,icon_trans, "y", icon_pivotY, icon_pivotY);
         //图标需要执行的动画
         final float scalePercent = ScreenUtils.dip2px(this,80) / icon_width;
-        final float transPercent = ((scalePercent - 1 ) * icon_width) / 2;
+        final float transWidth = (ScreenUtils.dip2px(this,80) - icon_width) / 2;
         final ObjectAnimator animatorIconAlpha = getFloatAnimator(SHORT_TIME,icon_trans, "alpha", 0, 1);
-        final ObjectAnimator animatorIconTransX = getFloatAnimator(SHORT_TIME,icon_trans, "translationX", icon_pivotX, screenWidth / 2 - transPercent - 24);
-        final ObjectAnimator animatorIconTransY = getFloatAnimator(SHORT_TIME,icon_trans, "translationY", icon_pivotY, screenHeight - sheetsHeight + statusbarHeight + transPercent - 15);
+        final ObjectAnimator animatorIconTransX = getFloatAnimator(SHORT_TIME,icon_trans, "x", icon_pivotX, (screenWidth - icon_width) / 2);
+        final ObjectAnimator animatorIconTransY = getFloatAnimator(SHORT_TIME,icon_trans, "y", icon_pivotY, screenHeight - sheetsHeight + statusbarHeight + transWidth + padding);
         final ObjectAnimator animatorIconScaleX = getFloatAnimator(SHORT_TIME,icon_trans, "scaleX", 1, scalePercent);
         final ObjectAnimator animatorIconScaleY = getFloatAnimator(SHORT_TIME,icon_trans, "scaleY", 1, scalePercent);
         animatorSet.playTogether(animatorSheetPivotY,animatorIconGetX,animatorIconGetY,animatorIconAlpha,animatorSheetAlpha,animatorSheetGet);
         animatorSet.start();
         animatorSet.addListener(new MyAnimatorListener() {
             public void onAnimationEnd(Animator animation) {
-                startAnimators(animatorSheetScale, animatorIconScaleX, animatorIconScaleY, animatorIconTransX, animatorIconTransY);
+                startAnimators(animatorSheetScale,animatorIconScaleX,animatorIconScaleY, animatorIconTransX, animatorIconTransY);
             }
         });
 

@@ -1,0 +1,10 @@
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    android:transitionOrdering="sequential"
+    >
+    <changeBounds/>
+    <fade android:fadingMode="fade_in_out" >
+        <targets>
+            <target android:targetId="@id/wrapper" />
+        </targets>
+    </fade>
+</transitionSet>

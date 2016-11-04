@@ -85,6 +85,7 @@ public class AnimatorSampleC extends AppCompatActivity {
                 switch (newState) {
                     case 5:
                         finish();
+                        overridePendingTransition(-1,-1);
                         break;
                 }
             }

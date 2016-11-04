@@ -3,11 +3,10 @@ package transform;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityOptionsCompat;
-import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,19 +14,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.drawable.demo.transitionbottomsheets.R;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
 /**
  * Created by admin on 2016/10/28.
  */
 public class AnimatorSampleA extends AppCompatActivity{
-    @BindView(R.id.image)
-    ImageView imageView;
     @BindView(R.id.recycler)
     RecyclerView recyclerView;
     @BindView(R.id.mark_view)
@@ -39,11 +34,6 @@ public class AnimatorSampleA extends AppCompatActivity{
         ButterKnife.bind(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new MAdapter());
-    }
-
-    @OnClick(R.id.image)
-    public void onClick(View v){
-        startActivity(new Intent(AnimatorSampleA.this,AnimatorSampleB.class), ActivityOptionsCompat.makeSceneTransitionAnimation(this,imageView, "icon").toBundle());
     }
 
     private class MAdapter extends RecyclerView.Adapter<ViewHoder>{

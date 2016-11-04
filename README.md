@@ -1,5 +1,5 @@
 # transition-bottomsheets
-仿豌豆荚详情页跳转，兼容api8</br>
+仿豌豆荚详情页跳转，兼容api11以上</br>
 大部分transition效果只在api21上有效</br>
 </br>
 ###预览效果
